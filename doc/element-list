@@ -1,0 +1,4 @@
+eduzz.challenge.backend.apiblog
+eduzz.challenge.backend.apiblog.controller
+eduzz.challenge.backend.apiblog.model.entities
+eduzz.challenge.backend.apiblog.model.repositories

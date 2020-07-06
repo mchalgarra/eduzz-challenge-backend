@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"eduzz.challenge.backend.apiblog.controller"},{"l":"eduzz.challenge.backend.apiblog.model.entities"},{"l":"eduzz.challenge.backend.apiblog.model.repositories"}]
