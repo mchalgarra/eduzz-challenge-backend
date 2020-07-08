@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * Main class, execute the application
  * @author Michell Algarra Barros
- * @version 1.0
+ * @version 1.1
  * @since 1.0
  */
 @SpringBootApplication

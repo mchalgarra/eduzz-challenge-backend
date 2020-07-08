@@ -1,10 +1,7 @@
 package eduzz.challenge.backend.apiblog.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import javax.validation.Valid;
 
@@ -24,11 +21,13 @@ import eduzz.challenge.backend.apiblog.model.entities.Author;
 import eduzz.challenge.backend.apiblog.model.entities.Blog;
 import eduzz.challenge.backend.apiblog.model.repositories.AuthorRepository;
 import eduzz.challenge.backend.apiblog.model.repositories.BlogRepository;
+import eduzz.challenge.backend.apiblog.model.util.ElementById;
+import eduzz.challenge.backend.apiblog.model.util.ElementList;
 
 /**
- * Responsible class for mapping it self and methods to answer spring
+ * Responsible class for mapping it self and methods to answer the HTTP methods
  * @author Michell Algarra Barros
- * @version 1.0
+ * @version 1.1
  * @since 1.0
  */
 @RestController
@@ -58,16 +57,8 @@ public class AuthorController {
 	 */
 	@GetMapping
 	public @ResponseBody Map<String, Map<String, List<Author>>> getAuthor() {
-		Map<String, Map<String, List<Author>>> data = new HashMap<>();
-		Map<String, List<Author>> authorMap = new HashMap<>();
-		Iterable<Author> author = authorRepository.findAll();
-		
-		List<Author> list = StreamSupport.stream(author.spliterator(), false).collect(Collectors.toList());
-		
-		authorMap.put("authors", list);
-		data.put("data", authorMap);
-		
-		return data;
+		ElementList<Author> authorList = new ElementList<>();
+		return authorList.getList("authors", authorRepository.findAll());
 	}
 	
 	/**
@@ -77,14 +68,8 @@ public class AuthorController {
 	 */
 	@GetMapping("/{id}")
 	public @ResponseBody Map<String, Map<String, List<Author>>> getAuthorById(@PathVariable int id) {
-		Map<String, Map<String, List<Author>>> data = new HashMap<>();
-		Map<String, List<Author>> authorMap = new HashMap<>();
-		List<Author> author = authorRepository.findById(id).stream().collect(Collectors.toList());
-		
-		authorMap.put("authors", author);
-		data.put("data", authorMap);
-		
-		return data;
+		ElementById<Author> author = new ElementById<>(); 
+		return author.getElement("authors", authorRepository.findById(id));
 	}
 	
 	/**

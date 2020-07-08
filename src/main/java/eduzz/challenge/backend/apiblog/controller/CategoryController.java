@@ -1,10 +1,7 @@
 package eduzz.challenge.backend.apiblog.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,11 +19,13 @@ import eduzz.challenge.backend.apiblog.model.entities.Blog;
 import eduzz.challenge.backend.apiblog.model.entities.Category;
 import eduzz.challenge.backend.apiblog.model.repositories.BlogRepository;
 import eduzz.challenge.backend.apiblog.model.repositories.CategoryRepository;
+import eduzz.challenge.backend.apiblog.model.util.ElementById;
+import eduzz.challenge.backend.apiblog.model.util.ElementList;
 
 /**
- * Responsible class for mapping it self and methods to answer spring
+ * Responsible class for mapping it self and methods to answer the HTTP methods
  * @author Michell Algarra Barros
- * @version 1.0
+ * @version 1.1
  * @since 1.0
  */
 @RestController
@@ -56,16 +55,8 @@ public class CategoryController {
 	 */
 	@GetMapping
 	public @ResponseBody Map<String, Map<String, List<Category>>> getCategory() {
-		Map<String, Map<String, List<Category>>> data = new HashMap<>();
-		Map<String, List<Category>> categoryMap = new HashMap<>();
-		Iterable<Category> category = categoryRepository.findAll();
-		
-		List<Category> list = StreamSupport.stream(category.spliterator(), false).collect(Collectors.toList());
-		
-		categoryMap.put("categories", list);
-		data.put("data", categoryMap);
-		
-		return data;
+		ElementList<Category> category = new ElementList<>(); 
+		return category.getList("categories", categoryRepository.findAll());
 	}
 	
 	/**
@@ -75,14 +66,8 @@ public class CategoryController {
 	 */
 	@GetMapping("/{id}")
 	public @ResponseBody Map<String, Map<String, List<Category>>> getCategoryById(@PathVariable int id) {
-		Map<String, Map<String, List<Category>>> data = new HashMap<>();
-		Map<String, List<Category>> categoryMap = new HashMap<>();
-		List<Category> category = categoryRepository.findById(id).stream().collect(Collectors.toList());
-		
-		categoryMap.put("categories", category);
-		data.put("data", categoryMap);
-		
-		return data;
+		ElementById<Category> category = new ElementById<>(); 
+		return category.getElement("categories", categoryRepository.findById(id));
 	}
 	
 	/**

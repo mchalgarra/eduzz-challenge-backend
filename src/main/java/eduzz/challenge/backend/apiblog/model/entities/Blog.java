@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 /**
  * All properties from "Blog" object
  * @author Michell Algarra Barros
- * @version 1.0
+ * @version 1.1
  * @since 1.0
  */
 @Entity
