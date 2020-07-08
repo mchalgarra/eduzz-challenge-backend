@@ -1,10 +1,7 @@
 package eduzz.challenge.backend.apiblog.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,11 +19,13 @@ import eduzz.challenge.backend.apiblog.model.entities.Blog;
 import eduzz.challenge.backend.apiblog.model.repositories.AuthorRepository;
 import eduzz.challenge.backend.apiblog.model.repositories.BlogRepository;
 import eduzz.challenge.backend.apiblog.model.repositories.CategoryRepository;
+import eduzz.challenge.backend.apiblog.model.util.ElementById;
+import eduzz.challenge.backend.apiblog.model.util.ElementList;
 
 /**
- * Responsible class for mapping it self and methods to answer spring
+ * Responsible class for mapping it self and methods to answer the HTTP methods
  * @author Michell Algarra Barros
- * @version 1.0
+ * @version 1.1
  * @since 1.0
  */
 @RestController
@@ -74,16 +73,8 @@ public class BlogController {
 	 */
 	@GetMapping
 	public @ResponseBody Map<String, Map<String, List<Blog>>> getPost() {
-		Map<String, Map<String, List<Blog>>> data = new HashMap<>();
-		Map<String, List<Blog>> postMap = new HashMap<>();
-		Iterable<Blog> blog = blogRepository.findAll();
-		
-		List<Blog> list = StreamSupport.stream(blog.spliterator(), false).collect(Collectors.toList());
-		
-		postMap.put("posts", list);
-		data.put("data", postMap);
-		
-		return data;
+		ElementList<Blog> blogList = new ElementList<>();
+		return blogList.getList("posts", blogRepository.findAll());
 	}
 	
 	/**
@@ -93,14 +84,8 @@ public class BlogController {
 	 */
 	@GetMapping("/{id}")
 	public @ResponseBody Map<String, Map<String, List<Blog>>> getPostById(@PathVariable int id) {
-		Map<String, Map<String, List<Blog>>> data = new HashMap<>();
-		Map<String, List<Blog>> postMap = new HashMap<>();
-		List<Blog> blog = blogRepository.findById(id).stream().collect(Collectors.toList());
-		
-		postMap.put("posts", blog);
-		data.put("data", postMap);
-		
-		return data;
+		ElementById<Blog> post = new ElementById<>(); 
+		return post.getElement("posts", blogRepository.findById(id));
 	}
 	
 	/**
