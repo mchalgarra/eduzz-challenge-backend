@@ -7,7 +7,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * Returns a element of the desired type by it's id
+ * Returns an element of the desired type by it's id
  * @author Michell Algarra Barros
  * @version 1.1
  * @since 1.1
