@@ -15,7 +15,7 @@ import java.util.stream.StreamSupport;
 public class ElementList<T> {
 
 	/**
-	 * Formats the search result from the database into "data"...data category...obtained data
+	 * Formats the obtained data from the database into "data"...data category...obtained data
 	 * @param arrayCategory Category that is shown in the element search
 	 * @param iterable All elements caught in database request
 	 * @return Map - Formated data 
