@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class ElementById<T> {
 
 	/**
-	 * Formats the search result from the database into "data"...data category...obtained data
+	 * Formats the received data from the database into "data"...data category...obtained data
 	 * @param arrayCategory Category that is shown in the element search
 	 * @param optional Element caught in database search by id
 	 * @return Map - Formated data 
