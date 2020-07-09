@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 /**
- * Returns a element list of the desired type
+ * Returns an element list of the desired type
  * @author Michell Algarra Barros
  * @version 1.1
  * @since 1.1
